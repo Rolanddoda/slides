@@ -106,7 +106,7 @@ obj.value++; // Callback doesn't log anymore`,
     type: 'about',
     title: '👋 About Me',
     description:
-      'Hi, my name is Roland and I am an experienced developer working as a Vue.js dev since 2017. I am the Frontend Lead at ProfitMetrics.io, a company providing real-time profit tracking and optimization software for e-commerce businesses, focusing on Profit-on-Ad-Spend (POAS®).',
+      'Hi, my name is Roland, working as a Vue.js dev since 2017 and currently the Frontend Lead at ProfitMetrics.io.',
     socials: [
       {
         platform: 'LinkedIn',
