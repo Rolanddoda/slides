@@ -1,85 +1,80 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { provide } from 'vue'
+import useSlides from '@/composables/slides'
+import SlideControls from '@/components/slides/SlideControls.vue'
+import Slide from '@/components/slides/Slide.vue'
+import { slides } from './slides-data'
+
+// Import individual slide templates
+import TitleSlide from '@/components/slides/TitleSlide.vue'
+import CodeSlide from '@/components/slides/CodeSlide.vue'
+import UseCasesSlide from '@/components/slides/UseCasesSlide.vue'
+import AboutSlide from '@/components/slides/AboutSlide.vue'
+import ConclusionSlide from '@/components/slides/ConclusionSlide.vue'
+
+const { currentSlide, isFirstSlide, isLastSlide, next, prev } = useSlides()
+
+// Provide the slides state to child components if needed
+provide('currentSlide', currentSlide)
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <div
+    class="bg-gradient-to-br from-green-50 via-white to-blue-50 min-h-screen flex flex-col items-center justify-center p-4"
+  >
+    <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl overflow-hidden">
+      <div class="p-8 md:p-12 min-h-[450px] flex flex-col justify-center">
+        <!-- Render all slides, but only the active one will be visible -->
+        <Slide
+          v-for="slide in slides"
+          :key="slide.id"
+          :active="currentSlide === slide.id"
+          :slideId="slide.id"
+        >
+          <!-- Dynamically render the appropriate slide content based on slide type -->
+          <TitleSlide
+            v-if="slide.id === 1"
+            :title="slide.title"
+            :subtitle="slide.subtitle"
+            :image="slide.image"
+          />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+          <CodeSlide
+            v-else-if="slide.id === 2 || slide.id === 3 || slide.id === 4"
+            :title="slide.title"
+            :description="slide.description"
+            :code="slide.code"
+            :footer="slide.footer"
+          />
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+          <UseCasesSlide
+            v-else-if="slide.id === 5"
+            :title="slide.title"
+            :useCases="slide.useCases"
+          />
+
+          <ConclusionSlide
+            v-else-if="slide.id === 6"
+            :title="slide.title"
+            :description="slide.description"
+            :tags="slide.tags"
+          />
+
+          <AboutSlide
+            v-else-if="slide.id === 7"
+            :title="slide.title"
+            :description="slide.description"
+            :socials="slide.socials"
+          />
+        </Slide>
+      </div>
+
+      <SlideControls
+        :isFirstSlide="isFirstSlide"
+        :isLastSlide="isLastSlide"
+        @prev="prev"
+        @next="next"
+      />
     </div>
-  </header>
-
-  <RouterView />
+  </div>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>

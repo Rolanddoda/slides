@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Watchers: Pause & Resume Slides</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Use Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Basic styles for slide transitions */
+        .slide {
+            display: none; /* Hide slides by default */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .slide.active {
+            display: block; /* Show active slide */
+            opacity: 1;
+        }
+        /* Style code blocks */
+        pre {
+            background-color: #1f2937; /* gray-800 */
+            color: #f3f4f6; /* gray-100 */
+            padding: 1rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem; /* text-sm */
+            line-height: 1.25rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        code {
+             font-family: 'Courier New', Courier, monospace;
+        }
+        /* Style inline code */
+        code:not(pre > code) {
+            background-color: #e5e7eb; /* gray-200 */
+            color: #1f2937; /* gray-800 */
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.25rem; /* rounded-sm */
+            font-size: 0.9em;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-green-50 via-white to-blue-50 min-h-screen flex flex-col items-center justify-center p-4"> <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl overflow-hidden">
+        <div id="slide-container" class="p-8 md:p-12 min-h-[450px] flex flex-col justify-center">
+
+            <div class="slide active" data-slide="1">
+                <h1 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-4">⏯️ Vue Watchers: Pause & Resume</h1>
+                <p class="text-lg md:text-xl text-center text-gray-600">More control over reactivity!</p>
+                <img src="https://vuejs.org/logo.svg" alt="Vue Logo" class="w-20 h-20 mx-auto mt-8 opacity-80">
+            </div>
+
+            <div class="slide" data-slide="2">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">🤔 The Old Way: Only `stop()`</h2>
+                <p class="text-gray-600 mb-4">Previously, `watch` and `watchEffect` returned only a `stop` function to permanently end the watcher:</p>
+                <pre><code class="language-javascript">// Watcher setup
+const stop = watch(obj, () => {
+  console.log('obj changed');
+});
+
+// Later...
+stop(); // 👈 Watcher is stopped permanently</code></pre>
+                <p class="text-gray-600 mt-4">Once stopped, it couldn't be restarted.</p>
+            </div>
+
+            <div class="slide" data-slide="3">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">✨ New in Vue: Pause & Resume!</h2>
+                <p class="text-gray-600 mb-4">Now, `watch` and `watchEffect` return an object with more controls:</p>
+                <pre><code class="language-javascript">const controls = watch(obj, callback);
+
+// controls object:
+{
+  pause: () => void,  // Temporarily stop triggering callback
+  resume: () => void, // Resume triggering callback
+  stop: () => void    // Permanently stop the watcher
+}</code></pre>
+                <p class="text-gray-600 mt-4">This allows for temporary suspension of the watcher's effects.</p>
+            </div>
+
+             <div class="slide" data-slide="4">
+                 <h2 class="text-2xl font-semibold text-gray-700 mb-4">🔧 Example: Pause, Resume, Stop</h2>
+                 <p class="text-gray-600 mb-4">Here's how you can use the new controls:</p>
+                 <pre><code class="language-javascript">const { pause, resume, stop } = watch(obj, () => {
+  console.log('obj changed');
+});
+
+pause();
+obj.value++; // Callback doesn't log
+
+resume();
+obj.value++; // Callback logs 'obj changed'
+
+stop();
+obj.value++; // Callback doesn't log anymore</code></pre>
+                 <p class="text-gray-600 mt-4">Provides fine-grained control over watcher execution.</p>
+            </div>
+
+            <div class="slide" data-slide="5">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6">💡 Potential Use Cases</h2>
+                <ul class="space-y-4">
+                    <li class="flex items-start">
+                        <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div>
+                            <h3 class="font-medium text-gray-800">Performance Optimization</h3>
+                            <p class="text-gray-600">Pause watchers when a component is inactive or hidden (e.g., off-screen, in background tab) to save resources.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                         <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div>
+                            <h3 class="font-medium text-gray-800">Complex UI Updates</h3>
+                            <p class="text-gray-600">Temporarily pause watchers during multi-step updates or animations to prevent intermediate state triggers.</p>
+                        </div>
+                    </li>
+                     <li class="flex items-start">
+                         <svg class="w-6 h-6 text-blue-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg> <div>
+                            <h3 class="font-medium text-gray-800">Conditional Watching</h3>
+                            <p class="text-gray-600">Easier to manage watchers that should only run under certain conditions without needing complex conditional logic inside the callback.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="slide" data-slide="6">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-6 text-center">🎉 More Control Over Watchers!</h2>
+                <p class="text-gray-600 text-center mb-6">The ability to pause and resume `watch` and `watchEffect` provides developers with finer-grained control over reactive effects, leading to potentially cleaner code and better performance optimization opportunities.</p>
+                 <div class="text-center mt-8 text-xs text-gray-500">
+                    #VueJS #JavaScript #Reactivity #Watchers #Frontend #WebDev #Vue3
+                 </div>
+            </div>
+
+            <div class="slide" data-slide="7">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">👋 About Me</h2>
+                <p class="text-center text-gray-700 mb-4">
+                    Hi, my name is Roland and I am an experienced developer working as a Vue.js dev since 2017. I am the Frontend Lead at ProfitMetrics.io, a company providing real-time profit tracking and optimization software for e-commerce businesses, focusing on Profit-on-Ad-Spend (POAS®).
+                </p>
+                <p class="text-center mt-6 text-sm">
+                    Follow me on
+                    <a href="https://www.linkedin.com/in/roland-doda/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                        LinkedIn
+                    </a>
+                     for more content like this!
+                </p>
+                 <p class="text-center mt-2 text-sm">
+                    Definitely check out
+                    <a href="https://profitmetrics.io/" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+                        ProfitMetrics.io
+                    </a>!
+                </p>
+            </div>
+
+        </div>
+
+        <div class="bg-gray-100 p-4 flex justify-between items-center border-t border-gray-200">
+            <button id="prevBtn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg inline-flex items-center transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                Prev
+            </button>
+            <button id="nextBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                Next
+                <i data-lucide="arrow-right" class="w-4 h-4 ml-2"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- Basic Slide Logic ---
+        let slides;
+        let totalSlides;
+        let currentSlide = 1; // Start at slide 1
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // Function to show a specific slide
+        function showSlide(slideNumber) {
+            // Validate slide number
+            if (!slides || slideNumber < 1 || slideNumber > totalSlides) {
+                console.error("Invalid slide number or slides not initialized:", slideNumber);
+                return;
+            }
+
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+
+            // Show the target slide
+            const targetSlide = document.querySelector(`.slide[data-slide="${slideNumber}"]`);
+            if (targetSlide) {
+                targetSlide.classList.add('active');
+                currentSlide = slideNumber;
+                updateNavigation();
+            } else {
+                console.error("Slide element not found for:", slideNumber);
+            }
+        }
+
+        // Function to update navigation buttons
+        function updateNavigation() {
+            // Enable/disable buttons based on current slide index
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+        }
+
+        // Event Listeners for buttons
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        });
+
+        // Initialize the slides and navigation after the DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+             // Query slides and count them *after* the DOM is ready
+             slides = document.querySelectorAll('.slide');
+             totalSlides = slides.length; // Should correctly count 7 slides
+
+             // Initialize Lucide icons
+             lucide.createIcons();
+
+             // Show the first slide initially
+             showSlide(1);
+        });
+    </script>
+</body>
+</html>
