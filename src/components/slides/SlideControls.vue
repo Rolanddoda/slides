@@ -17,7 +17,7 @@ defineEmits<{
       :disabled="isFirstSlide"
       class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg inline-flex items-center transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      <span class="w-4 h-4 mr-2">←</span>
+      <span class="w-4 h-full mr-2">←</span>
       Prev
     </button>
     <button
@@ -26,7 +26,7 @@ defineEmits<{
       class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg inline-flex items-center transition duration-150 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
     >
       Next
-      <span class="w-4 h-4 ml-2">→</span>
+      <span class="w-4 h-full ml-2">→</span>
     </button>
   </div>
 </template>
