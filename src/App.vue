@@ -41,6 +41,7 @@ provide('currentSlide', currentSlide)
 
           <CodeSlide
             v-else-if="slide.id === 2 || slide.id === 3 || slide.id === 4"
+            :id="slide.id"
             :title="slide.title"
             :description="slide.description"
             :code="slide.code"
