@@ -1,9 +1,7 @@
 import { ref, computed } from 'vue'
-import { slides } from '../slides-data'
 
-export default function useSlides() {
+export function useSlides(totalSlides: number) {
   const currentSlide = ref(1)
-  const totalSlides = slides.length
 
   const isFirstSlide = computed(() => currentSlide.value === 1)
   const isLastSlide = computed(() => currentSlide.value === totalSlides)

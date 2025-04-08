@@ -1,18 +1,23 @@
 <script setup lang="ts">
-defineProps<{
-  title: string
-  description: string
-  socials: Array<{
-    platform: string
-    url: string
-  }>
-}>()
+const socials = [
+  {
+    platform: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/roland-doda/',
+  },
+  {
+    platform: 'ProfitMetrics.io',
+    url: 'https://profitmetrics.io/',
+  },
+]
 </script>
 
 <template>
   <div>
-    <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">{{ title }}</h2>
-    <p class="text-center text-gray-700 mb-4">{{ description }}</p>
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">👋 About Me</h2>
+    <p class="text-center text-gray-700 mb-4">
+      Hi, my name is Roland, working as a <strong> Vue.js dev since 2017 </strong> and <br />
+      currently as <strong> Frontend Lead at ProfitMetrics.io </strong>.
+    </p>
     <p class="text-center text-gray-700 mb-4">
       We provide real-time profit tracking and optimization software specifically for e-commerce
       businesses. Our platform helps stores gain full transparency into their profitability by
