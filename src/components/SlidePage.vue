@@ -11,7 +11,7 @@ const { currentSlide, isFirstSlide, isLastSlide, prev, next } = useSlides(props.
 
 <template>
   <div
-    class="bg-gradient-to-br from-green-50 via-white to-blue-50 min-h-screen flex flex-col items-center justify-center p-4"
+    class="bg-gradient-to-br from-green-50 via-white to-blue-50 flex flex-col items-center justify-center p-4"
   >
     <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl overflow-hidden">
       <div class="p-8 md:p-12 min-h-[450px] flex flex-col justify-center">
