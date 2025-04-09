@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { routes } from '@/router'
 import type { SlideRoute } from '@/types/slides'
+import { vAutoAnimate } from '@formkit/auto-animate'
 
 const slides = routes.filter((route) => route.path !== '/') as SlideRoute[]
 const sortedSlides = slides.sort((a, b) => {
@@ -20,12 +21,12 @@ function formatDate(dateString: string): string {
 
 <template>
   <div class="max-w-6xl mx-auto px-4 py-8">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" v-auto-animate>
       <router-link
         v-for="slide in sortedSlides"
         :key="slide.path"
         :to="slide.path"
-        class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1 hover:scale-[1.02] transition-transform duration-300"
+        class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transform hover:-translate-y-1 hover:scale-[1.02] transition-transform duration-300"
       >
         <!-- Date badge in top-right corner of image -->
         <div class="h-48 overflow-hidden relative">
