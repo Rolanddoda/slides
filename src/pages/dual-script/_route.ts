@@ -9,6 +9,6 @@ export default defineRoute({
     title: 'SFC with Dual Script',
     description: 'Learn how to use the dual script pattern in Vue.js Single File Components.',
     image: new URL('./preview.png', import.meta.url).href,
-    datetime: new Date('2025-03-10').toISOString(),
+    datetime: new Date('2025-04-10').toISOString(),
   },
 }) satisfies SlideRoute

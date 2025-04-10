@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Slide1 from '../dual-script/slides/Slide1.vue'
+import Slide1 from './slides/Slide1.vue'
 import Slide2 from './slides/Slide2.vue'
 import Slide3 from './slides/Slide3.vue'
 import Slide4 from './slides/Slide4.vue'

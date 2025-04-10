@@ -9,6 +9,6 @@ export default defineRoute({
     title: 'Pause and Resume Watchers',
     description: 'Learn how to pause and resume watchers in Vue.js.',
     image: new URL('./preview.png', import.meta.url).href,
-    datetime: new Date('2025-03-03').toISOString(),
+    datetime: new Date('2025-04-03').toISOString(),
   },
 }) satisfies SlideRoute

@@ -8,6 +8,12 @@ const sortedSlides = slides.sort((a, b) => {
   return new Date(b.meta.datetime).getTime() - new Date(a.meta.datetime).getTime()
 })
 
+// Function to check if slide is new (within last 7 days)
+function isNew(dateString: string): boolean {
+  if (!dateString) return false
+  return new Date(dateString) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+}
+
 // Function to format dates nicely
 function formatDate(dateString: string): string {
   const date = new Date(dateString)
@@ -36,25 +42,24 @@ function formatDate(dateString: string): string {
             alt="Slide preview"
             class="w-full h-full object-cover object-center transition-transform duration-500 transform hover:scale-105"
           />
-
-          <!-- New tag if within last 7 days -->
-          <div
-            v-if="
-              slide.meta.datetime &&
-              new Date(slide.meta.datetime) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-            "
-            class="absolute top-3 left-3 bg-blue-600 text-white text-xs font-medium px-2 py-1 rounded-md"
-          >
-            NEW
-          </div>
         </div>
 
         <!-- Content container -->
         <div class="p-5 flex flex-col flex-grow">
-          <!-- Title -->
-          <h3 class="font-semibold text-lg text-gray-800 mb-2 line-clamp-2">
-            {{ slide.meta.title }}
-          </h3>
+          <!-- Title with NEW badge -->
+          <div class="flex items-center mb-2">
+            <h3 class="font-semibold text-lg text-gray-800 line-clamp-2 flex-grow">
+              {{ slide.meta.title }}
+            </h3>
+
+            <!-- NEW badge next to title -->
+            <span
+              v-if="slide.meta.datetime && isNew(slide.meta.datetime)"
+              class="ml-2 flex-shrink-0 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800"
+            >
+              NEW
+            </span>
+          </div>
 
           <!-- Description -->
           <p class="text-gray-600 text-sm mb-3 line-clamp-3 flex-grow">
