@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 
-const route = useRoute()
-const isHomePage = computed(() => route.path === '/')
 const isMenuOpen = ref(false)
 
 function toggleMenu() {
@@ -51,27 +48,6 @@ function toggleMenu() {
 
         <!-- Right side - Navigation -->
         <div class="hidden md:flex items-center space-x-3">
-          <!-- Back button (only on non-home pages) -->
-          <router-link
-            v-if="!isHomePage"
-            to="/"
-            class="inline-flex items-center px-3 py-1.5 border border-gray-300 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
-          >
-            <svg
-              class="mr-1.5 h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            Home
-          </router-link>
-
           <!-- Author (LinkedIn) link with improved icon -->
           <a
             href="https://www.linkedin.com/in/roland-doda/"
@@ -90,7 +66,7 @@ function toggleMenu() {
 
           <!-- Source Code (GitHub) link -->
           <a
-            href="https://github.com/roland-doda/useful-projects"
+            href="https://github.com/Rolanddoda/slides"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center px-3 py-1.5 border border-gray-300 bg-white rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
@@ -142,15 +118,6 @@ function toggleMenu() {
 
       <!-- Mobile menu -->
       <div v-if="isMenuOpen" class="md:hidden py-3 space-y-2 border-t border-gray-200">
-        <router-link
-          v-if="!isHomePage"
-          to="/"
-          class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-          @click="isMenuOpen = false"
-        >
-          Home
-        </router-link>
-
         <a
           href="https://www.linkedin.com/in/roland-doda/"
           target="_blank"
@@ -167,7 +134,7 @@ function toggleMenu() {
         </a>
 
         <a
-          href="https://github.com/roland-doda/useful-projects"
+          href="https://github.com/Rolanddoda/slides"
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"

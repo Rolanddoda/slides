@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppBanner from '@/components/AppBanner.vue'
+import AppHeader from '@/components/AppHeader.vue'
 import { useRoute } from 'vue-router'
 import { ref, watch } from 'vue'
 
@@ -22,7 +22,7 @@ watch(
 
 <template>
   <div class="min-h-screen flex flex-col overflow-x-hidden">
-    <AppBanner />
+    <AppHeader />
 
     <main class="grid flex-grow bg-gray-50 relative">
       <router-view v-slot="{ Component, route }">
