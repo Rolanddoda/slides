@@ -1,20 +1,15 @@
-<script setup lang="ts">
-import SlideHeading from '@/components/SlideHeading.vue'
-import SlideDescription from '@/components/SlideDescription.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
-    <SlideHeading> ✨ New in Vue: Pause & Resume!</SlideHeading>
+    <SlideH2> ✨ New in Vue: Pause & Resume!</SlideH2>
 
-    <SlideDescription>
-      Now, `watch` and `watchEffect` return an object with more controls:
-    </SlideDescription>
+    <SlideBody1> Now, `watch` and `watchEffect` return an object with more controls: </SlideBody1>
 
     <img src="../images/3.png" alt="Code illustration" />
 
-    <SlideDescription secondary>
+    <SlideBody1 secondary>
       This allows for temporary suspension of the watcher's effects.
-    </SlideDescription>
+    </SlideBody1>
   </div>
 </template>

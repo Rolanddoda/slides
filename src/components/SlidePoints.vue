@@ -3,7 +3,7 @@ defineProps<{
   points: Array<{
     icon: string
     title: string
-    description: string
+    description?: string
   }>
 }>()
 </script>

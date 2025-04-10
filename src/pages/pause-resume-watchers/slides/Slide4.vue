@@ -1,18 +1,13 @@
-<script setup lang="ts">
-import SlideHeading from '@/components/SlideHeading.vue'
-import SlideDescription from '@/components/SlideDescription.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
-    <SlideHeading> 🔧 Example: Pause, Resume, Stop</SlideHeading>
+    <SlideH2> 🔧 Example: Pause, Resume, Stop</SlideH2>
 
-    <SlideDescription> Here's how you can use the new controls: </SlideDescription>
+    <SlideBody1> Here's how you can use the new controls: </SlideBody1>
 
     <img src="../images/4.png" alt="Code illustration" />
 
-    <SlideDescription secondary>
-      Provides fine-grained control over watcher execution.
-    </SlideDescription>
+    <SlideBody1 secondary> Provides fine-grained control over watcher execution. </SlideBody1>
   </div>
 </template>

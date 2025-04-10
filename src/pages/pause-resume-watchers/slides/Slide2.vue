@@ -1,19 +1,16 @@
-<script setup lang="ts">
-import SlideHeading from '@/components/SlideHeading.vue'
-import SlideDescription from '@/components/SlideDescription.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
-    <SlideHeading> 🤔 The Old Way: Only `stop()` </SlideHeading>
+    <SlideH2> 🤔 The Old Way: Only `stop()` </SlideH2>
 
-    <SlideDescription>
+    <SlideBody1>
       Previously, `watch` and `watchEffect` returned only a `stop` function to permanently end the
       watcher:
-    </SlideDescription>
+    </SlideBody1>
 
     <img src="../images/2.png" alt="Code illustration" />
 
-    <SlideDescription secondary> Once stopped, it couldn't be restarted. </SlideDescription>
+    <SlideBody1 secondary> Once stopped, it couldn't be restarted. </SlideBody1>
   </div>
 </template>

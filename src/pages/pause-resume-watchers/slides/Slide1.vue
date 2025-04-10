@@ -1,14 +1,12 @@
-<script setup lang="ts">
-import SlideTitle from '@/components/SlideTitle.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
-    <SlideTitle>
+    <SlideH1>
       ⏯️ Vue Watchers: Pause & Resume
 
       <template #subtitle> More control over reactivity! </template>
-    </SlideTitle>
+    </SlideH1>
 
     <img
       src="https://vuejs.org/logo.svg"

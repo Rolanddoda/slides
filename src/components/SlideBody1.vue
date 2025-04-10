@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <p :class="secondary ? 'text-gray-600 mt-4' : 'text-gray-600 mb-4'">
+  <p :class="secondary ? 'text-gray-500 mt-4' : 'text-gray-600 mb-4'">
     <slot></slot>
   </p>
 </template>
