@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper mt-2">
     <div class="bg bg-blue-950"></div>
     <slot></slot>
   </div>
@@ -15,8 +15,8 @@
 
   .bg {
     position: absolute;
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
+    width: 100%;
+    height: 100%;
     z-index: 0;
     border-radius: 12px;
   }
