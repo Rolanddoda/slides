@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper mt-2">
-    <div class="bg bg-blue-950"></div>
+    <slot name="bg">
+      <div class="bg bg-blue-950"></div>
+    </slot>
     <slot></slot>
   </div>
 </template>
@@ -13,7 +15,8 @@
   align-items: center;
   isolation: isolate;
 
-  .bg {
+  .bg,
+  :slotted(.bg) {
     position: absolute;
     width: 100%;
     height: 100%;
