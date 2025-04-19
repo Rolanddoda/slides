@@ -13,6 +13,7 @@ import SlidePoints from './components/SlidePoints.vue'
 import SlideCodeImg from './components/SlideCodeImg.vue'
 import AboutSlide from './components/AboutSlide.vue'
 import SlideControls from './components/SlideControls.vue'
+import SlideCode from './components/SlideCode.vue'
 
 const app = createApp(App)
 
@@ -27,5 +28,6 @@ app
   .component('SlideCodeImg', SlideCodeImg)
   .component('SlideControls', SlideControls)
   .component('AboutSlide', AboutSlide)
+  .component('SlideCode', SlideCode)
 
 app.mount('#app')
